@@ -1,0 +1,71 @@
+# 🧩 PokeTrackr – Pokémon Collection Manager
+
+**PokeTrackr** is a Python-based CLI or Flask app that helps Pokémon card collectors and resellers organize their collection, track real-time market values, and make smarter profit decisions — all from one centralized tool.
+
+---
+
+## 📌 Problem → Solution → Impact
+
+### 🧠 Problem  
+Pokémon card collectors and resellers often struggle to keep track of their growing collections and constantly changing market values. Manual tracking via spreadsheets or notes leads to:
+
+- Disorganized inventory  
+- Missed selling opportunities  
+- Inaccurate card valuations  
+- Wasted time researching prices  
+
+This is especially frustrating for resellers who need to move fast in a volatile market.
+
+---
+
+### 🔧 Solution  
+**PokeTrackr** solves this by providing a digital Pokémon collection manager with:
+
+- 📥 Add/search cards by set, rarity, condition, quantity, and price  
+- 💰 Real-time price scraping from eBay using BeautifulSoup  
+- 📊 Profit/loss insights by comparing purchase price to market value  
+- 📁 Save/load collection data in JSON or CSV  
+- (Optional) 🌐 Flask web dashboard interface  
+
+---
+
+### 🌍 Impact  
+PokeTrackr empowers collectors and resellers to:
+
+- ⏱️ Save time through automation  
+- 📈 Make informed pricing and selling decisions  
+- 💸 Maximize profit opportunities  
+- 📦 Scale and organize large collections  
+
+This project was built by an active-duty Soldier who uses Pokémon reselling as a side hustle. It’s a real-world example of **soldier-driven innovation**, applying software skills to solve a meaningful problem.
+
+---
+
+## 🔨 Tech Stack
+
+- Python 3  
+- BeautifulSoup (eBay scraping)  
+- JSON / CSV (data storage)  
+- GitHub (version control)  
+- *(Optional)* Flask (for a web interface)
+
+---
+
+## 🚧 Features Roadmap
+
+- [x] CLI version (Add/Search/View cards)  
+- [x] Web scraping from eBay sold listings  
+- [x] Export/import JSON or CSV  
+- [ ] Flask web dashboard  
+- [ ] Stripe/Gumroad monetization  
+- [ ] eBay API integration  
+- [ ] Card scan (QR/barcode)
+
+---
+
+## 💬 Want to Contribute?
+
+Ideas, improvements, or feedback welcome! Open an issue or fork the repo.
+
+---
+
