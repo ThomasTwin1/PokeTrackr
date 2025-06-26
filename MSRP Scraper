@@ -1,0 +1,59 @@
+from twilio.rest import Client
+import requests
+import time
+import ctypes
+import json
+
+
+# Products to monitor
+products = {
+  "Target 151 ETB": "https://www.target.com/p/pokemon-trading-card-game-scarlet-38-violet-151-elite-trainer-box/-/A-88897899",
+  "Target Pokemon Center 151 ETB": "https://www.target.com/p/pokemon-tcg-scarlet-violet-151-pokemon-center-elite-trainer-box/-/A-1001558942",
+  "Target Prismatic Evolutions": "https://www.target.com/s/pokemon%2Bsv%2B151",
+  "Walmart Prismatic Evolutions": "https://www.walmart.com/ip/Pokemon-Scarlet-Violet-Prismatic-Evolutions-Elite-Trainer-Box/13816151308",
+  "Pokemon Center 151 ETB": "https://www.pokemoncenter.com/product/290-85466/pokemon-tcg-scarlet-and-violet-151-pokemon-center-elite-trainer-box",
+  "Best Buy 151 ETB": "https://www.bestbuy.com/site/pokemon-trading-card-game-151-elite-trainer-box/6548366.p"
+}
+
+
+headers = {
+    "User-Agent": "Mozilla/5.0"
+}
+
+# --- ALERT FUNCTIONS ---
+def send_sms(message):
+    client = Client(twilio_sid, twilio_token)
+    client.messages.create(
+        body=message,
+        from_=twilio_from_number,
+        to=twilio_to_number
+    )
+
+def send_discord_alert(message):
+    payload = {"content": message}
+    requests.post(discord_webhook_url, data=json.dumps(payload), headers={"Content-Type": "application/json"})
+
+def show_popup(message):
+    try:
+        ctypes.windll.user32.MessageBoxW(0, message, "Restock Alert", 1)
+    except:
+        print(f"POP-UP ALERT: {message}")
+
+# --- MAIN MONITOR FUNCTION ---
+def check_products():
+    for name, url in products.items():
+        try:
+            response = requests.get(url, headers=headers, timeout=10)
+            if any(keyword not in response.text.lower() for keyword in ["sold out", "out of stock", "currently unavailable"]):
+                alert = f"🚨 {name} might be IN STOCK!\n{url}"
+                send_sms(alert)
+                send_discord_alert(alert)
+        except Exception as e:
+            print(f"Error checking {name}: {e}")
+
+# --- Continuous Monitoring Every 60 Seconds ---
+if __name__ == "__main__":
+    print("🔄 Starting MSRP Restock Tracker (checking every 60 seconds)...")
+    while True:
+        check_products()
+        time.sleep(60)
